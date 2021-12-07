@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name          Google Voice: Dark Mode
 // @namespace     http://userstyles.org
-// @description	  Material dark theme for Google Voice heavily influenced by Google Messages. Currently functioning as of 2022.
+// @description	  Material dark theme for Google Voice heavily influenced by Google Messages. Currently functioning as of 2021.
 // @author        Myles Keller
-// @homepage
+// @homepage      https://github.com/myleskeller/Userscripts/raw/main/Google%20Voice%20-%20Dark%20Mode.user.js
 // @include       http://voice.google.com/*
 // @include       https://voice.google.com/*
 // @run-at        document-start
