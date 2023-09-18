@@ -9,6 +9,8 @@
 // @description  Converts Mikrotik webfig's full-row table comments into inline comments similar to WinBox
 // @match        http://192.168.88.1/webfig/
 // @grant        none
+// @namespace    https://github.com/myleskeller/
+// @license MIT
 // @noframes
 // ==/UserScript==
 
