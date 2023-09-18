@@ -1,11 +1,15 @@
 // ==UserScript==
 // @name         Convert Mikrotik Table Row Comments into Inline Comments
-// @namespace    github.com/myleskeller
+// @homepage     https://github.com/myleskeller/Userscripts/tree/main
+// @supportURL   https://github.com/myleskeller/Userscripts/issues
+// @downloadURL  https://github.com/myleskeller/Userscripts/raw/main/MikrotikInlineComments.user.js
+// @updateURL    https://github.com/myleskeller/Userscripts/raw/main/MikrotikInlineComments.user.js
 // @version      1.0
 // @author       Myles Keller
 // @description  Converts Mikrotik webfig's full-row table comments into inline comments similar to WinBox
 // @match        http://192.168.88.1/webfig/
 // @grant        none
+// @noframes
 // ==/UserScript==
 
 //@match (above) should include your Mikrotik router's IP address if you have it configured from default
@@ -13,7 +17,7 @@
 
 
 let table = document.querySelector('table.table');
-let loadDelay = 5;
+let loadDelay = 1;
 
 (function() {
     'use strict';
@@ -87,6 +91,7 @@ let loadDelay = 5;
             observer.disconnect(); // Disconnect the existing observer
         }
         observer = setupMutationObserver(); // Set up a new observer
+        pageLoaded(1) // doesn't seem necessary to wait longer since main interface is already loaded
     }
 
     // Create a MutationObserver to watch for changes to the table
@@ -111,12 +116,11 @@ let loadDelay = 5;
             subtree: true
         };
         newObserver.observe(document.body, config);
-        pageLoaded()
         return newObserver;
     }
 
     // perform initial scan for table and add comment header if necessary
-    function pageLoaded() {
+    function pageLoaded(delay) {
         setTimeout(function() {
             // Find the table with the class "table"
             table = document.querySelector('table.table');
@@ -128,10 +132,11 @@ let loadDelay = 5;
                 let tbodies = table.querySelectorAll('tbody');
                 tbodies.forEach(processTbody);
             }
-        }, loadDelay * 1000); // convert milliseconds to seconds
+        }, delay * 1000); // convert milliseconds to seconds
     }
 
 
     let observer = setupMutationObserver();
+    pageLoaded(5)
     window.addEventListener('hashchange', resetMutationObserver);
 })();
